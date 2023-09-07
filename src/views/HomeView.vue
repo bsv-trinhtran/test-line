@@ -51,17 +51,16 @@ onMounted(async () => {
   // 1. LIFFの初期化
   await liff.init({ liffId: '2000661940-rVB8DdeY' }).catch((err) => {
     console.error(err)
-    accessToken.value = liff.getAccessToken()
     window.alert('LIFFの初期化失敗。\n' + err)
   })
   if (!liff.isLoggedIn()) {
     await liff.login()
     // return
   }
-
+  accessToken.value = liff.getAccessToken()
   profile.value = await liff.getProfile()
-  console.log(liffAccessToken.value, profile.value)
-  console.log(123456)
+  console.log(accessToken.value, profile.value)
+  console.log(1234567)
   await notificationToken()
 })
 </script>
