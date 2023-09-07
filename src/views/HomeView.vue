@@ -8,6 +8,21 @@ function login() {
     liff.login()
   }
 }
+const sendMessage = () => {
+  liff
+    .sendMessages([
+      {
+        type: 'text',
+        text: 'Hello, World!'
+      }
+    ])
+    .then(() => {
+      console.log('message sent')
+    })
+    .catch((err) => {
+      console.log('error', err)
+    })
+}
 onMounted(async () => {
   // 1. LIFFの初期化
   await liff.init({ liffId: '2000661940-rVB8DdeY' }).catch((err) => {
@@ -27,6 +42,21 @@ onMounted(async () => {
 
 <template>
   <main>
-    <TheWelcome />
+    <!-- <TheWelcome /> -->
+    <div @click="sendMessage" class="send">send messages</div>
   </main>
 </template>
+<style>
+main {
+  display: flex;
+  justify-content: center;
+}
+.send {
+  width: 200px;
+  background: red;
+  border-radius: 8px;
+  text-align: center;
+  padding: 12px 0px;
+  cursor: pointer;
+}
+</style>
