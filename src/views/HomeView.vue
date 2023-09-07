@@ -15,9 +15,9 @@ const notificationToken = async () => {
   const { data } = await axios.post(
     'https://api.line.me/message/v3/notifier/token',
     {
-      //   body: JSON.stringify({
-      //     liffAccessToken: liffAccessToken.value
-      //   })
+      body: JSON.stringify({
+        liffAccessToken: liffAccessToken.value
+      })
     },
     {
       headers: {
@@ -63,7 +63,7 @@ onMounted(async () => {
 
   //   profile.value = await liff.getProfile()
   //   console.log(liffAccessToken.value, profile.value)
-  console.log(123)
+  console.log(1234)
   await notificationToken()
 })
 </script>
