@@ -6,38 +6,37 @@ import axios from 'axios'
 
 const accessToken = ref()
 const profile = ref()
+const serviceNotificationToken = ref()
 
-const sendMessage = async () => {
-  //   liff
-  //     .sendMessages([
-  //       {
-  //         type: 'text',
-  //         text: 'Hello, World!'
-  //       }
-  //     ])
-  //     .then(() => {
-  //       console.log('message sent')
-  //     })
-  //     .catch((err) => {
-  //       console.log('error', err)
-  //     })
-  const { data } = await axios.post(
-    'https://api.line.me/v2/bot/message/push',
-    {
-      to: profile.value.userId,
-      messages: [
-        {
-          type: 'text',
-          text: 'Xin chào từ ứng dụng của bạn!'
-        }
-      ]
-    },
+const notificationToken = async () => {
+  const { data } = axios.post(
+    'https://api.line.me/message/v3/notifier/token',
+    {},
     {
       headers: {
-        Authorization: 'Bearer ' + accessToken.value
+        Authorization: `Bearer ${accessToken.value}`,
+        'Content-Type': 'application/json'
       }
     }
   )
+  console.log(data)
+}
+
+const sendMessage = async () => {
+  const message = {
+    templateName: 'hello',
+    params: {
+      date: '2020-04-23',
+      username: 'Brown & Cony'
+    },
+    notificationToken: 'YOUR_NOTIFICATION_TOKEN' // Thay thế bằng Service Notification Token
+  }
+  const { data } = await axios.post('https://api.line.me/message/v3/notifier/send', message, {
+    headers: {
+      Authorization: 'Bearer ' + accessToken.value,
+      'Content-Type': 'application/json'
+    }
+  })
   console.log(data)
 }
 onMounted(async () => {
@@ -54,6 +53,7 @@ onMounted(async () => {
   profile.value = await liff.getProfile()
   console.log(accessToken.value, profile.value)
   console.log(123)
+  await notificationToken()
 })
 </script>
 
