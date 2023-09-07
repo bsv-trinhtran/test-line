@@ -1,27 +1,44 @@
 <script setup lang="ts">
 import TheWelcome from '../components/TheWelcome.vue'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import liff from '@line/liff'
+import axios from 'axios'
 
-function login() {
-  if (!liff.isLoggedIn()) {
-    liff.login()
-  }
-}
-const sendMessage = () => {
-  liff
-    .sendMessages([
-      {
-        type: 'text',
-        text: 'Hello, World!'
+const accessToken = ref()
+const profile = ref()
+
+const sendMessage = async () => {
+  //   liff
+  //     .sendMessages([
+  //       {
+  //         type: 'text',
+  //         text: 'Hello, World!'
+  //       }
+  //     ])
+  //     .then(() => {
+  //       console.log('message sent')
+  //     })
+  //     .catch((err) => {
+  //       console.log('error', err)
+  //     })
+  const { data } = await axios.post(
+    'https://api.line.me/v2/bot/message/push',
+    {
+      to: profile.value.userId,
+      messages: [
+        {
+          type: 'text',
+          text: 'Xin chào từ ứng dụng của bạn!'
+        }
+      ]
+    },
+    {
+      headers: {
+        Authorization: 'Bearer ' + accessToken.value
       }
-    ])
-    .then(() => {
-      console.log('message sent')
-    })
-    .catch((err) => {
-      console.log('error', err)
-    })
+    }
+  )
+  console.log(data)
 }
 onMounted(async () => {
   // 1. LIFFの初期化
@@ -33,9 +50,9 @@ onMounted(async () => {
     await liff.login()
     // return
   }
-  const accessToken = liff.getAccessToken()
-  const profile = await liff.getProfile()
-  console.log({ accessToken, profile })
+  accessToken.value = liff.getAccessToken()
+  profile.value = await liff.getProfile()
+  console.log(accessToken.value, profile.value)
   console.log(123)
 })
 </script>
