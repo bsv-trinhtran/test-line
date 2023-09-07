@@ -15,11 +15,11 @@ const notificationToken = async () => {
   const { data } = await axios.post(
     'https://api.line.me/message/v3/notifier/token',
     {
-      liffAccessToken: liffAccessToken.value
+      liffAccessToken: accessToken.value
     },
     {
       headers: {
-        Authorization: `Bearer ${liffAccessToken.value}`,
+        Authorization: `Bearer ${accessToken.value}`,
         'Content-Type': 'application/json'
       }
     }
@@ -49,19 +49,19 @@ const sendMessage = async () => {
 onMounted(async () => {
   // eyJhbGciOiJIUzI1NiJ9.tjnDJ4dtiuctZyVJ6B59dFKN92YUBlNoKixb2mbA8AYY1i09PIU6-LWcob4_yDFQJ5-B6UDnFhZmW2P2jEXIs6QE3U96vUObqB1-PHPeDB1LhexzA5xPAmDlLvifP67Pzy5iT7enGTFFEjrdngSQemhpfnplw6knopG6dZcYyio.ebWkxiEMFlpCIPMKmOBix8bkX375TWlTG3j
   // 1. LIFFの初期化
-  //   await liff.init({ liffId: '2000661940-rVB8DdeY' }).catch((err) => {
-  //     console.error(err)
-  //     accessToken.value = liff.getAccessToken()
-  //     window.alert('LIFFの初期化失敗。\n' + err)
-  //   })
-  //   if (!liff.isLoggedIn()) {
-  //     await liff.login()
-  //     // return
-  //   }
+  await liff.init({ liffId: '2000661940-rVB8DdeY' }).catch((err) => {
+    console.error(err)
+    accessToken.value = liff.getAccessToken()
+    window.alert('LIFFの初期化失敗。\n' + err)
+  })
+  if (!liff.isLoggedIn()) {
+    await liff.login()
+    // return
+  }
 
-  //   profile.value = await liff.getProfile()
-  //   console.log(liffAccessToken.value, profile.value)
-  console.log(12345)
+  profile.value = await liff.getProfile()
+  console.log(liffAccessToken.value, profile.value)
+  console.log(123456)
   await notificationToken()
 })
 </script>
