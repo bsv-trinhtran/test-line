@@ -9,7 +9,7 @@ const profile = ref()
 const serviceNotificationToken = ref()
 
 const notificationToken = async () => {
-  const { data } = axios.post(
+  const { data } = await axios.post(
     'https://api.line.me/message/v3/notifier/token',
     {},
     {
