@@ -140,6 +140,7 @@ onMounted(async () => {
         </div>
       </div>
     </div>
+    <a href="https://vercel.com/">vercel</a>
     <div @click="sendMessage" class="send">send messages ({{ error }})</div>
     <div>{{ context }}</div>
   </main>
