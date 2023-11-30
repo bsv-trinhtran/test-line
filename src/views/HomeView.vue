@@ -100,7 +100,7 @@ onMounted(async () => {
   //   api login:
   // 2000599010-Gbbpqw9E
 
-  await liff.init({ liffId: '2000661940-rVB8DdeY' }).catch((err) => {
+  await liff.init({ liffId: '2001789435-kx2OvKOr' }).catch((err) => {
     console.error(err)
     window.alert('LIFFの初期化失敗。\n' + err)
   })
