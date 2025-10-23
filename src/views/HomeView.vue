@@ -21,7 +21,7 @@ const loginWithLine = async () => {
     liffId: '2000635253-WADl2ApA',
   });
     if (!liff.isLoggedIn()) {
-        const currentUrl = window.location.href;
+        const currentUrl = 'https://test-line-wheat.vercel.app/';
         await liff.login({
             redirectUri: currentUrl,
         });
