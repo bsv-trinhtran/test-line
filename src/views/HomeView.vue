@@ -27,10 +27,12 @@ const loginWithLine = async () => {
         });
         return;
      }
-   const profile = await liff.getProfile();
-   lineId.value = profile.userId;
    await liff.logout();
 };
+if(liff.isLoggedIn()) {
+const profile = await liff.getProfile();
+   lineId.value = profile.userId;
+}
 </script>
 
 <style>
