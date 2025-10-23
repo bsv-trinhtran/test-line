@@ -4,7 +4,7 @@
 
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
       <label for="lineId">Line ID</label>
-      <input type="text" id="lineId" v-model="lineId">
+      <input type="text" id="lineId" v-model="lineId" style="height: 50px; width: 300px; padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
     </div>
   </div>
 </template>
